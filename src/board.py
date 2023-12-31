@@ -3,6 +3,9 @@ class Board:
         # Create a 3x3 grid initialized with empty spaces
         self.grid = [[" " for _ in range(3)] for _ in range(3)]
 
+    def reset_board(self):
+        self.grid = [[" " for _ in range(3)] for _ in range(3)]
+        
     def make_move(self, position, player):
         # update the board with the players move
         if self.grid[position[0]][position[1]] == " ":
