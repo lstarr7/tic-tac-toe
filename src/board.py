@@ -8,10 +8,7 @@ class Board:
 
     def make_move(self, position, player):
         # update the board with the players move
-        print(position)
-        print(player.symbol)
         if self.grid[position[0]][position[1]] == " ":
-            print("hi")
             self.grid[position[0]][position[1]] = player.symbol
             return True
         else:
