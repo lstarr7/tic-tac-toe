@@ -5,11 +5,14 @@ class Board:
 
     def reset_board(self):
         self.grid = [[" " for _ in range(3)] for _ in range(3)]
-        
+
     def make_move(self, position, player):
         # update the board with the players move
+        print(position)
+        print(player.symbol)
         if self.grid[position[0]][position[1]] == " ":
-            self.grid[position[0]][position[1]] == player.symbol
+            print("hi")
+            self.grid[position[0]][position[1]] = player.symbol
             return True
         else:
             return False

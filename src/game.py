@@ -1,5 +1,5 @@
-from player import Player
-from board import Board
+from .player import Player
+from .board import Board
 
 class Game:
     def __init__(self):
@@ -22,6 +22,9 @@ class Game:
                 print("invalud input. Please enter a row and column as a number seperated by a space")
     def play(self):
         while True:
+            self.board.display()
+            position = self.get_player_move()
+            self.board.make_move(position, self.current_player)
             if self.board.is_win(self.current_player.symbol) or self.board.is_tie():
                 # Announce the result
                 if self.board.is_win(self.current_player.symbol):
@@ -36,7 +39,7 @@ class Game:
                     # Optionally reset other game states like current player
                 else:
                     break
-
+            self.switch_player()
 
     def switch_player(self):
         #handel a players turn
