@@ -7,19 +7,23 @@ class Game:
         self.player1 = Player("X")
         self.player2 = Player("O")
         self.current_player = self.player1
-    
     def get_player_move(self):
-        #get player move
         while True:
             try:
-                move = input(f"{self.current_player.name} ({self.current_player.symbol}), enter your move (row, col)")
-                row , col = map(int, move.split())
-                if self.board.is_valid_move(row,col):
-                    return [row, col] #return the move as a list
+                move = input(f"{self.current_player.name} ({self.current_player.symbol}), enter your move (row, col): ")
+                row, col = map(int, move.split())
+                
+                if 0 <= row < 3 and 0 <= col < 3:  # Check if the move is within the grid
+                    if self.board.is_valid_move(row, col):
+                        return [row, col]  # Return the move as a list
+                    else:
+                        print("This cell is already occupied. Please try again.")
                 else:
-                    print("This cell is already occupied please try again")
+                    print("Move out of range. Please enter row and column numbers between 0 and 2.")
+
             except ValueError:
-                print("invalud input. Please enter a row and column as a number seperated by a space")
+                print("Invalid input. Please enter row and column as numbers separated by a space.")
+
     def play(self):
         while True:
             self.board.display()

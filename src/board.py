@@ -46,7 +46,7 @@ class Board:
         return True #if no cell is empty it is a tie
 
     def display(self):
-        for row in self.grid:
-           print(" | ".join(row))
-           if row != self.grid[-1]:
-               print("-" * 9)
+        for i, row in enumerate(self.grid):
+            print(" | ".join(row))  # Print each row with vertical bars
+            if i < len(self.grid) - 1:  # Check if it's not the last row
+                print("-" * 9)  # Print horizontal line between rows
