@@ -29,6 +29,11 @@ class Board:
         
         return False
         
+    def is_valid_move(self, row, col):
+        #check to see if the spot able to be moved upon
+        if self.grid[row][col] == " ":
+            return True
+        return False
     
     def is_tie(self):
         #check if the game is a tie
