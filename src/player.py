@@ -1,7 +1,5 @@
 class Player:
-    def __init__(self, symbol, name):
+    def __init__(self, symbol):
         self.symbol = symbol
-        self.name = name
+        self.name = input(f"Enter name for player {symbol}: ")
     
-    def get_move(self):
-        # get the players move
