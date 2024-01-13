@@ -20,12 +20,12 @@ class TextBox:
                     self.text = ''  # Reset the text
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
-                else:
+                elif len(self.text) < 20:
                     self.text += event.unicode
 
     def draw(self, screen):
         # Render the text
-        text_surface = self.font.render(self.text, True, (255, 255, 255))
+        text_surface = self.font.render(self.text, True, (100, 50, 0))
         # Resize the box if the text is too long
         width = max(200, text_surface.get_width()+10)
         self.rect.w = width

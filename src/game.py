@@ -43,9 +43,10 @@ class Game:
                 if event.type == pygame.QUIT:
                     run = False
                 self.textbox.handle_event(event)
-            self.screen.fill((0,0,0))
+            print(self.textbox.text)
+            self.screen.fill((20,100,0))
             self.textbox.draw(self.screen)
-            pygame.display.flip
+            pygame.display.flip()
             '''
             print("hi")
             self.board.display()
