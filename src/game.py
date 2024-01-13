@@ -2,18 +2,19 @@ import pygame
 from .player import Player
 from .board import Board
 from .textbox import TextBox
-
+from .textrendering import TextRenderer
 class Game:
     def __init__(self):
         info = pygame.display.Info()
 
 # You can now access the screen width and height
-        screen_width = info.current_w
-        screen_height = info.current_h
-        self.screen = pygame.display.set_mode((screen_width//2,screen_height//2))
+        self.screen_width = info.current_w
+        self.screen_height = info.current_h
+        self.screen = pygame.display.set_mode((self.screen_width//2,self.screen_height//2))
         self.font = pygame.font.Font(None, 32)
         self.textbox = TextBox(50, 50, 140, 32, self.font)
         self.board = Board()
+        self.text_renderer = TextRenderer(font_size=32, font_color=(255, 255, 255))
         self.player1 = Player("X")
         self.player2 = Player("O")
         self.current_player = self.player1
@@ -39,12 +40,29 @@ class Game:
         input_active = False
         run = True
         while run:
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN and (self.player1.name == "" or self.player2.name == ""):
+                        if self.player1.name == "":
+                            self.player1.name = self.textbox.text
+                            self.text_renderer.draw_text(self.screen,self.player1.name,(self.screen_width - 50, self.screen_height))
+                        else:
+                            self.player2.name = self.textbox.text
+                            self.text_renderer.draw_text(self.screen,self.player2.name,(self.screen_width - 50, self.screen_height - 50))
+                        #print(f"{self.player1.name} player1 name")
+                        #print(f"{self.player2.name} player2 name")
                 self.textbox.handle_event(event)
-            print(self.textbox.text)
             self.screen.fill((20,100,0))
+            if self.player1.name:
+                print("player1")
+                self.text_renderer.draw_text(self.screen,self.player1.name,(self.screen_width - 50, self.screen_height))
+            if self.player2.name:
+                print("player 2")
+                self.text_renderer.draw_text(self.screen,self.player2.name,(100, 50))
+
             self.textbox.draw(self.screen)
             pygame.display.flip()
             '''
