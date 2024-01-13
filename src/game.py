@@ -1,6 +1,7 @@
 import pygame
 from .player import Player
 from .board import Board
+from .textbox import TextBox
 
 class Game:
     def __init__(self):
@@ -10,6 +11,8 @@ class Game:
         screen_width = info.current_w
         screen_height = info.current_h
         self.screen = pygame.display.set_mode((screen_width//2,screen_height//2))
+        self.font = pygame.font.Font(None, 32)
+        self.textbox = TextBox(50, 50, 140, 32, self.font)
         self.board = Board()
         self.player1 = Player("X")
         self.player2 = Player("O")
@@ -32,7 +35,18 @@ class Game:
                 print("Invalid input. Please enter row and column as numbers separated by a space.")
 
     def play(self):
-        while True:
+        text_input = ""
+        input_active = False
+        run = True
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                self.textbox.handle_event(event)
+            self.screen.fill((0,0,0))
+            self.textbox.draw(self.screen)
+            pygame.display.flip
+            '''
             print("hi")
             self.board.display()
             position = self.get_player_move()
@@ -55,6 +69,7 @@ class Game:
             #self.board.draw(self.screen)
             pygame.display.flip()
             self.switch_player()
+            '''
 
     def switch_player(self):
         #handel a players turn
