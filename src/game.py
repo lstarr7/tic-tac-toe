@@ -1,8 +1,15 @@
+import pygame
 from .player import Player
 from .board import Board
 
 class Game:
     def __init__(self):
+        info = pygame.display.Info()
+
+# You can now access the screen width and height
+        screen_width = info.current_w
+        screen_height = info.current_h
+        self.screen = pygame.display.set_mode((screen_width//2,screen_height//2))
         self.board = Board()
         self.player1 = Player("X")
         self.player2 = Player("O")
@@ -26,6 +33,7 @@ class Game:
 
     def play(self):
         while True:
+            print("hi")
             self.board.display()
             position = self.get_player_move()
             self.board.make_move(position, self.current_player)
@@ -43,6 +51,9 @@ class Game:
                     # Optionally reset other game states like current player
                 else:
                     break
+            self.screen.fill((255, 255, 255))
+            #self.board.draw(self.screen)
+            pygame.display.flip()
             self.switch_player()
 
     def switch_player(self):
